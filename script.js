@@ -1,15 +1,20 @@
 'use strict';
 
-// const Person = function (firstName, birthYear) {
-//   // Instance properties
-//   this.firstName = firstName;
-//   this.birthYear = birthYear;
+const Person = function (firstName, birthYear) {
+  // Instance properties
+  this.firstName = firstName;
+  this.birthYear = birthYear;
 
-//   this.calcAge = function () {
-//     console.log(2037 - this.birthYear);
-//   };
-// };
-// const jonas = new Person('Jonas', 1991);
+  //   this.calcAge = function () {
+  //     console.log(2037 - this.birthYear);
+  //   };
+};
+const jonas = new Person('Jonas', 1991);
+Person.hey = function () {
+  console.log('Hey there');
+  console.log(this);
+};
+Person.hey();
 // console.log(jonas);
 
 // const matilda = new Person('Matilda', 2017);
@@ -98,6 +103,10 @@ class PersonCl {
   }
   get fullName() {
     return this._fullName;
+  }
+  static hey() {
+    console.log('Hey there!');
+    console.log(this);
   }
 }
 
