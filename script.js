@@ -85,30 +85,30 @@
 // bmw.break();
 // bmw.accelerate();
 
-// class PersonCl {
-//   constructor(fullName, birthYear) {
-//     this.fullName = fullName;
-//     this.birthYear = birthYear;
-//   }
-//   calcAge() {
-//     console.log(2037 - this.birthYear);
-//   }
-//   get age() {
-//     return 2037 - this.birthYear;
-//   }
-//   set fullName(name) {
-//     console.log(name);
-//     if (name.includes(' ')) this._fullName = name;
-//     else alert(`${name} is not a full name`);
-//   }
-//   get fullName() {
-//     return this._fullName;
-//   }
-//   static hey() {
-//     console.log('Hey there!');
-//     console.log(this);
-//   }
-// }
+class PersonCl {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+  get age() {
+    return 2037 - this.birthYear;
+  }
+  set fullName(name) {
+    console.log(name);
+    if (name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name`);
+  }
+  get fullName() {
+    return this._fullName;
+  }
+  static hey() {
+    console.log('Hey there!');
+    console.log(this);
+  }
+}
 
 // const jessica = new PersonCl('Jessica Davis', 1996);
 // console.log(jessica);
@@ -262,43 +262,72 @@
 //   }
 // };
 
-const Car = function (make, speed) {
-  this.make = make;
-  this.speed = speed;
-};
+// const Car = function (make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+// };
 
-Car.prototype.accelerate = function () {
-  this.speed += 10;
-  this.printSpeed();
-};
-Car.prototype.break = function () {
-  this.speed -= 5;
-  this.printSpeed();
-};
-Car.prototype.printSpeed = function () {
-  console.log(`${this.make} is going at ${this.speed} km`);
-};
+// Car.prototype.accelerate = function () {
+//   this.speed += 10;
+//   this.printSpeed();
+// };
+// Car.prototype.break = function () {
+//   this.speed -= 5;
+//   this.printSpeed();
+// };
+// Car.prototype.printSpeed = function () {
+//   console.log(`${this.make} is going at ${this.speed} km`);
+// };
 
-const Ev = function (make, speed, charge) {
-  Car.call(this, make, speed);
-  this.charge = charge;
-};
-Ev.prototype = Object.create(Car.prototype);
-Ev.prototype.chargeBattery = function (chargeTo) {
-  this.charge = chargeTo;
-};
-Ev.prototype.accelerate = function () {
-  this.speed += 20;
-  this.charge -= 1;
-  console.log(
-    `${this.make} going at ${this.speed} km/h, with a charge of ${this.charge}%`
-  );
-};
+// const Ev = function (make, speed, charge) {
+//   Car.call(this, make, speed);
+//   this.charge = charge;
+// };
+// Ev.prototype = Object.create(Car.prototype);
+// Ev.prototype.chargeBattery = function (chargeTo) {
+//   this.charge = chargeTo;
+// };
+// Ev.prototype.accelerate = function () {
+//   this.speed += 20;
+//   this.charge -= 1;
+//   console.log(
+//     `${this.make} going at ${this.speed} km/h, with a charge of ${this.charge}%`
+//   );
+// };
 
-const tesla = new Ev('Tesla', 120, 23);
-console.log(tesla);
-tesla.accelerate();
-tesla.break();
-tesla.chargeBattery(90);
-tesla.accelerate();
+// const tesla = new Ev('Tesla', 120, 23);
+// console.log(tesla);
+// tesla.accelerate();
+// tesla.break();
+// tesla.chargeBattery(90);
+// tesla.accelerate();
 // console.log(Ev.accelerate());
+
+// class StudentCl extends PersonCl {
+//   constructor(fullName, birthYear, course) {
+//     super(fullName, birthYear);
+//     this.course = course;
+//   }
+//   introduce() {
+//     console.log(
+//       `My name is ${this.fullName} and I study ${this.course}`
+//     );
+//   }
+//   calcAge() {
+//     console.log(
+//       `Im ${
+//         2037 - this.birthYear
+//       } years old, but as student I feel more like ${
+//         2037 - this.birthYear + 10
+//       }`
+//     );
+//   }
+// }
+
+// const martha = new StudentCl(
+//   'Marhtha Jones',
+//   2012,
+//   'Computer Science'
+// );
+// martha.introduce();
+// martha.calcAge();
