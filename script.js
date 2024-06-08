@@ -85,30 +85,30 @@
 // bmw.break();
 // bmw.accelerate();
 
-class PersonCl {
-  constructor(fullName, birthYear) {
-    this.fullName = fullName;
-    this.birthYear = birthYear;
-  }
-  calcAge() {
-    console.log(2037 - this.birthYear);
-  }
-  get age() {
-    return 2037 - this.birthYear;
-  }
-  set fullName(name) {
-    console.log(name);
-    if (name.includes(' ')) this._fullName = name;
-    else alert(`${name} is not a full name`);
-  }
-  get fullName() {
-    return this._fullName;
-  }
-  static hey() {
-    console.log('Hey there!');
-    console.log(this);
-  }
-}
+// class PersonCl {
+//   constructor(fullName, birthYear) {
+//     this.fullName = fullName;
+//     this.birthYear = birthYear;
+//   }
+//   calcAge() {
+//     console.log(2037 - this.birthYear);
+//   }
+//   get age() {
+//     return 2037 - this.birthYear;
+//   }
+//   set fullName(name) {
+//     console.log(name);
+//     if (name.includes(' ')) this._fullName = name;
+//     else alert(`${name} is not a full name`);
+//   }
+//   get fullName() {
+//     return this._fullName;
+//   }
+//   static hey() {
+//     console.log('Hey there!');
+//     console.log(this);
+//   }
+// }
 
 // const jessica = new PersonCl('Jessica Davis', 1996);
 // console.log(jessica);
@@ -362,66 +362,106 @@ class PersonCl {
 // jay.introduce();
 // jay.calcAge();
 
-class Account {
-  // Public fields (instances)
-  locale = navigator.language;
+// class Account {
+//   // Public fields (instances)
+//   locale = navigator.language;
 
-  // Privates fields
-  #movements = [];
-  #pin;
+//   // Privates fields
+//   #movements = [];
+//   #pin;
 
-  constructor(owner, currency, pin) {
-    this.owner = owner;
-    this.currency = currency;
-    this.#pin = pin;
-    // this._movements = [];
-    // this.locale = navigator.language;
+//   constructor(owner, currency, pin) {
+//     this.owner = owner;
+//     this.currency = currency;
+//     this.#pin = pin;
+//     // this._movements = [];
+//     // this.locale = navigator.language;
 
-    console.log(`Thanks for opening an account ${owner} `);
+//     console.log(`Thanks for opening an account ${owner} `);
+//   }
+//   getMovements() {
+//     return this.#movements;
+//   }
+//   deposit(val) {
+//     this.#movements.push(val);
+//     return this;
+//   }
+//   withdrawal(val) {
+//     this.deposit(-val);
+//     return this;
+//   }
+//   requestLoan(val) {
+//     if (this._approveLoan(val)) {
+//       this.deposit(val);
+//       console.log(`Loan approved`);
+//       return this;
+//     }
+//   }
+//   // 4) Private methods
+//   // #approveLoan(val) {
+//   _approveLoan(val) {
+//     return true;
+//   }
+//   static helper() {
+//     console.log('Helper');
+//   }
+// }
+// const acc1 = new Account('Jonas', 'EUR', 1111);
+// acc1.deposit(250);
+// acc1.withdrawal(140);
+// acc1.requestLoan(1000);
+// // acc1._approveLoan(1000);
+// console.log(acc1.getMovements());
+// console.log(acc1);
+// Account.helper();
+// // console.log(acc1.#pin);
+// // console.log(acc.#movements);
+// // console.log(acc1.#approveLoan(100));
+
+// // Chaining
+// acc1
+//   .deposit(300)
+//   .deposit(500)
+//   .withdrawal(35)
+//   .requestLoan(100);
+// console.log(acc1.getMovements());
+
+class Student extends Person {
+  university = 'University of Lisbon';
+  #studyHours = 0;
+  #course;
+  static numSubjects = 10;
+
+  constructor(fullName, birthYear, startYear, course) {
+    super(fullName, birthYear);
+    this.startYear = startYear;
+    this.#course = course;
   }
-  getMovements() {
-    return this.#movements;
+  introduce() {
+    console.log(
+      `I study ${this.#course} at ${this.university}`
+    );
   }
-  deposit(val) {
-    this.#movements.push(val);
-    return this;
+  study(h) {
+    this.#makeCoffee();
+    this.#studyHours += h;
   }
-  withdrawal(val) {
-    this.deposit(-val);
-    return this;
+  #makeCoffee() {
+    return 'Here is a coffee for you 😊';
   }
-  requestLoan(val) {
-    if (this._approveLoan(val)) {
-      this.deposit(val);
-      console.log(`Loan approved`);
-      return this;
-    }
+  get testScore() {
+    return this._testScores;
   }
-  // 4) Private methods
-  // #approveLoan(val) {
-  _approveLoan(val) {
-    return true;
+  set testScore(score) {
+    this._testScores = score < 20 ? score : 0;
   }
-  static helper() {
-    console.log('Helper');
+  static printCurriculum() {
+    console.log(`There are ${this.numSubjects} subjects`);
   }
 }
-const acc1 = new Account('Jonas', 'EUR', 1111);
-acc1.deposit(250);
-acc1.withdrawal(140);
-acc1.requestLoan(1000);
-// acc1._approveLoan(1000);
-console.log(acc1.getMovements());
-console.log(acc1);
-Account.helper();
-// console.log(acc1.#pin);
-// console.log(acc.#movements);
-// console.log(acc1.#approveLoan(100));
-
-// Chaining
-acc1
-  .deposit(300)
-  .deposit(500)
-  .withdrawal(35)
-  .requestLoan(100);
-console.log(acc1.getMovements());
+const student = new Student(
+  'Jonas',
+  2020,
+  2037,
+  'Medicine'
+);
