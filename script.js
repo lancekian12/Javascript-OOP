@@ -426,42 +426,143 @@
 //   .requestLoan(100);
 // console.log(acc1.getMovements());
 
-class Student extends Person {
-  university = 'University of Lisbon';
-  #studyHours = 0;
-  #course;
-  static numSubjects = 10;
+// class Student extends Person {
+//   university = 'University of Lisbon';
+//   #studyHours = 0;
+//   #course;
+//   static numSubjects = 10;
 
-  constructor(fullName, birthYear, startYear, course) {
-    super(fullName, birthYear);
-    this.startYear = startYear;
-    this.#course = course;
+//   constructor(fullName, birthYear, startYear, course) {
+//     super(fullName, birthYear);
+//     this.startYear = startYear;
+//     this.#course = course;
+//   }
+//   introduce() {
+//     console.log(
+//       `I study ${this.#course} at ${this.university}`
+//     );
+//   }
+//   study(h) {
+//     this.#makeCoffee();
+//     this.#studyHours += h;
+//   }
+//   #makeCoffee() {
+//     return 'Here is a coffee for you 😊';
+//   }
+//   get testScore() {
+//     return this._testScores;
+//   }
+//   set testScore(score) {
+//     this._testScores = score < 20 ? score : 0;
+//   }
+//   static printCurriculum() {
+//     console.log(`There are ${this.numSubjects} subjects`);
+//   }
+// }
+// const student = new Student(
+//   'Jonas',
+//   2020,
+//   2037,
+//   'Medicine'
+// );
+
+// RECREATE
+
+// const Car = function (make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+// };
+
+// Car.prototype.accelerate = function () {
+//   this.speed += 10;
+//   this.printSpeed();
+// };
+// Car.prototype.break = function () {
+//   this.speed -= 5;
+//   this.printSpeed();
+// };
+// Car.prototype.printSpeed = function () {
+//   console.log(`${this.make} is going at ${this.speed} km`);
+// };
+
+// const Ev = function (make, speed, charge) {
+//   Car.call(this, make, speed);
+//   this.charge = charge;
+// };
+// Ev.prototype = Object.create(Car.prototype);
+// Ev.prototype.chargeBattery = function (chargeTo) {
+//   this.charge = chargeTo;
+// };
+// Ev.prototype.accelerate = function () {
+//   this.speed += 20;
+//   this.charge -= 1;
+//   console.log(
+//     `${this.make} going at ${this.speed} km/h, with a charge of ${this.charge}%`
+//   );
+// };
+
+// const tesla = new Ev('Tesla', 120, 23);
+// console.log(tesla);
+// tesla.accelerate();
+// tesla.break();
+// tesla.chargeBattery(90);
+// tesla.accelerate();
+// console.log(Ev.accelerate());
+
+class CarCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
   }
-  introduce() {
+  accelerate() {
+    this.speed += 10;
+    this.printSpeed();
+  }
+  break() {
+    this.speed -= 5;
+    this.printSpeed();
+    return this;
+  }
+  printSpeed() {
     console.log(
-      `I study ${this.#course} at ${this.university}`
+      `${this.make} is going at ${this.speed} km/h`
     );
   }
-  study(h) {
-    this.#makeCoffee();
-    this.#studyHours += h;
+  get speedUS() {
+    return this.speed / 1.6;
   }
-  #makeCoffee() {
-    return 'Here is a coffee for you 😊';
-  }
-  get testScore() {
-    return this._testScores;
-  }
-  set testScore(score) {
-    this._testScores = score < 20 ? score : 0;
-  }
-  static printCurriculum() {
-    console.log(`There are ${this.numSubjects} subjects`);
+
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
   }
 }
-const student = new Student(
-  'Jonas',
-  2020,
-  2037,
-  'Medicine'
-);
+class EVCl extends CarCl {
+  #charge;
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
+  chargeBattery(chargeTo) {
+    this.#charge = chargeTo;
+    return this;
+  }
+  accelerate() {
+    this.speed += 20;
+    this.#charge--;
+    console.log(
+      `${this.make} going at ${
+        this.speed
+      } km/h, with a charge of ${this.#charge}%`
+    );
+    return this;
+  }
+}
+const rivian = new EVCl('Rivian', 120, 23);
+rivian
+  .accelerate()
+  .break()
+  .chargeBattery(50)
+  .accelerate()
+  .break();
+
+console.log(rivian.speedUS);
